@@ -1,11 +1,21 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assests/logo.png';
 import ReactTooltip from 'react-tooltip';
 import { AuthContext } from '../../context/AuthConext/AuthProvider';
 
 const Header = () => {
-    const {user} = useContext (AuthContext);
+    const { user, logOut } = useContext(AuthContext);
+    // console.log (user.displayName)
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                navigate('/')
+            })
+            .catch(error => console.error(error))
+    }
 
     return (
         <div className="navbar bg-base-100 drop-shadow-lg">
@@ -15,6 +25,7 @@ const Header = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><Link to='/home'>Home</Link></li>
                         <li><Link to='/courses'>Courses</Link></li>
                         <li><Link to='/faq'>FAQ</Link></li>
                         <li><Link to='/blog'>Blog</Link></li>
@@ -32,6 +43,7 @@ const Header = () => {
 
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
+                    <li className='font-bold text-lg'><Link to='/home'>Home</Link></li>
                     <li className='font-bold text-lg'><Link to='/courses'>Courses</Link></li>
                     <li className='font-bold text-lg mx-5'><Link to='/faq'>FAQ</Link></li>
                     <li className='font-bold text-lg'><Link to='/blog'>Blog</Link></li>
@@ -39,13 +51,22 @@ const Header = () => {
             </div>
 
             <div className="navbar-end avatar">
-                <button className="btn btn-link text-green-700 no-underline text-sm md:text-lg"><Link to='/login'>Log In</Link></button>
-                <button className="btn btn-link text-orange-700 no-underline text-sm md:text-lg">Log Out</button>
+                {
+                    user && user?.uid ?
+                        <>
+                            <button onClick={handleSignOut} className="btn btn-link text-orange-700 no-underline text-sm md:text-lg">Log Out</button>
+                            <ReactTooltip type="success" place="bottom" effect="solid" />
+                            <div data-tip={user.displayName} className="w-10 md:w-16 rounded-full">
+                                <img  src={user.photoURL} alt='' />
+                            </div>
+                        </>
+                        :
+                        <>
+                            <button className="btn btn-link text-green-700 no-underline text-sm md:text-lg"><Link to='/login'>Log In</Link></button>
 
-                <ReactTooltip type="success" place="bottom" effect="solid" />
-                <div data-tip='{user.displayName} 'className="w-10 md:w-16 rounded-full">
-                    <img src="https://placeimg.com/192/192/people" alt='' />
-                </div>
+                        </>
+                }
+
             </div>
         </div>
 

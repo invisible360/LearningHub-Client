@@ -27,6 +27,7 @@ const SignUp = () => {
                 toast.success('User Successfully Created!');
                 setError('');
                 handleProfile(fullName, photourl);
+                navigate('/login');
             })
             .catch(error => {
                 console.error(error);
@@ -35,12 +36,14 @@ const SignUp = () => {
     }
 
     const handleProfile = (name, photourl) => {
-        
+
         profileUpdate({
             displayName: name,
             photoURL: photourl
         })
-            .then(() => { })
+            .then(() => {
+                navigate(0);
+            })
             .catch(error => {
                 console.error(error)
             })
