@@ -25,7 +25,7 @@ const SignUp = () => {
                 toast.success('User Successfully Created!');
                 setError('');
                 handleProfile(fullName, photourl);
-                navigate('/login');
+                navigate('/');
             })
             .catch(error => {
                 console.error(error);

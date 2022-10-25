@@ -43,10 +43,10 @@ const Header = () => {
 
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
-                    <li className='font-bold text-lg'><Link to='/home'>Home</Link></li>
-                    <li className='font-bold text-lg'><Link to='/courses'>Courses</Link></li>
-                    <li className='font-bold text-lg mx-5'><Link to='/faq'>FAQ</Link></li>
-                    <li className='font-bold text-lg'><Link to='/blog'>Blog</Link></li>
+                    <li className='font-bold text-lg ml-5'><Link to='/home'>Home</Link></li>
+                    <li className='font-bold text-lg ml-5'><Link to='/courses'>Courses</Link></li>
+                    <li className='font-bold text-lg ml-5'><Link to='/faq'>FAQ</Link></li>
+                    <li className='font-bold text-lg ml-5'><Link to='/blog'>Blog</Link></li>
                 </ul>
             </div>
 
@@ -57,7 +57,7 @@ const Header = () => {
                             <button onClick={handleSignOut} className="btn btn-link text-orange-700 no-underline text-sm md:text-lg">Log Out</button>
                             <ReactTooltip type="success" place="bottom" effect="float" data-padding="8px" />
                             <div data-tip={user.displayName} className="w-10 md:w-16 rounded-full">
-                                <img  src={user.photoURL} alt='' />
+                                <img src={user.photoURL} alt='' />
                             </div>
                         </>
                         :
