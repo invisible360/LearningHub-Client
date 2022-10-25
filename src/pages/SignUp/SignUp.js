@@ -17,8 +17,6 @@ const SignUp = () => {
         const fullName = form.fullname.value;
         const photourl = form.photourl.value;
 
-        // console.log(email, password, fullName, photourl);
-
         createUser(email, password)
             .then(result => {
                 const user = result.user;
@@ -32,6 +30,7 @@ const SignUp = () => {
             .catch(error => {
                 console.error(error);
                 setError(error.message);
+                toast.error('An Error Occured!');
             })
     }
 
@@ -45,7 +44,9 @@ const SignUp = () => {
                 navigate(0);
             })
             .catch(error => {
-                console.error(error)
+                console.error(error);
+                setError(error.message);
+                toast.error('An Error Occured!');
             })
     }
 

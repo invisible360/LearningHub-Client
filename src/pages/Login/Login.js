@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthConext/AuthProvider';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-    const { googleLogin, githubLogin, signIn } = useContext(AuthContext);
+    const { googleLogin, githubLogin, signIn, setLoading } = useContext(AuthContext);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const location = useLocation()
@@ -19,7 +19,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success('Google Sign In Successfull');
-                navigate (from, {replace: true});
+                navigate(from, { replace: true });
                 setError('')
             })
             .then(error => {
@@ -36,7 +36,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success('GitHub Sign In Successfull')
-                navigate (from, {replace: true});
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
@@ -57,13 +57,16 @@ const Login = () => {
                 console.log(user);
                 toast.success('Log In Successfull')
                 form.reset();
-                navigate (from, {replace: true});
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error)
                 setError(error.message);
                 toast.error('An Error Occured!')
-            });
+            })
+            .finally(() => {
+                setLoading(false)
+            })
     }
 
     return (

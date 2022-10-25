@@ -55,7 +55,7 @@ const Header = () => {
                     user && user?.uid ?
                         <>
                             <button onClick={handleSignOut} className="btn btn-link text-orange-700 no-underline text-sm md:text-lg">Log Out</button>
-                            <ReactTooltip type="success" place="bottom" effect="solid" />
+                            <ReactTooltip type="success" place="bottom" effect="float" data-padding="8px" />
                             <div data-tip={user.displayName} className="w-10 md:w-16 rounded-full">
                                 <img  src={user.photoURL} alt='' />
                             </div>
