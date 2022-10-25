@@ -1,9 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import { AuthContext } from '../../context/AuthConext/AuthProvider';
 
 const Login = () => {
+    const { googleLogin, githubLogin } = useContext(AuthContext);
+
+    const handleGoogleSignIn = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .then(error => {
+                console.error(error);
+            })
+
+    }
+
+    const handleGithubSignIn = () => {
+        githubLogin()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => {
+                console.error(error)
+            })
+    }
 
     return (
         <div>
@@ -34,8 +59,8 @@ const Login = () => {
                                 <p>New to this website? <Link to='/signup' className="btn btn-link">Create New Account</Link></p>
                             </label>
                             <p className='text-center'>Or</p>
-                            <button className='btn btn-outline'><FcGoogle /><span className='ml-2'>Continue With Google</span></button>
-                            <button className='btn btn-outline'><FaGithub /><span className='ml-2'>Continue With GitHub</span></button>
+                            <button onClick={handleGoogleSignIn} className='btn btn-outline'><FcGoogle /><span className='ml-2'>Continue With Google</span></button>
+                            <button onClick={handleGithubSignIn} className='btn btn-outline'><FaGithub /><span className='ml-2'>Continue With GitHub</span></button>
                         </div>
                     </form>
                 </div>

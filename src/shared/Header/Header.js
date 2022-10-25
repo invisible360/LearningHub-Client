@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assests/logo.png';
 import ReactTooltip from 'react-tooltip';
+import { AuthContext } from '../../context/AuthConext/AuthProvider';
 
 const Header = () => {
+    const {user} = useContext (AuthContext);
+
     return (
         <div className="navbar bg-base-100 drop-shadow-lg">
             <div className="navbar-start">
@@ -40,7 +43,7 @@ const Header = () => {
                 <button className="btn btn-link text-orange-700 no-underline text-sm md:text-lg">Log Out</button>
 
                 <ReactTooltip type="success" place="bottom" effect="solid" />
-                <div data-tip="Profile Name" className="w-10 md:w-16 rounded-full">
+                <div data-tip='{user.displayName} 'className="w-10 md:w-16 rounded-full">
                     <img src="https://placeimg.com/192/192/people" alt='' />
                 </div>
             </div>

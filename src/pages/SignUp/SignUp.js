@@ -1,7 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthConext/AuthProvider';
 
 const SignUp = () => {
+    const { createUser, profileUpdate } = useContext(AuthContext);
+    const [error, setError] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const fullName = form.fullname.value;
+        const photourl = form.photourl.value;
+
+        // console.log(email, password, fullName, photourl);
+
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                toast.success('User Successfully Created!');
+                setError('');
+                handleProfile(fullName, photourl);
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            })
+    }
+
+    const handleProfile = (name, photourl) => {
+        
+        profileUpdate({
+            displayName: name,
+            photoURL: photourl
+        })
+            .then(() => { })
+            .catch(error => {
+                console.error(error)
+            })
+    }
+
     return (
         <div>
             <div>
@@ -10,7 +54,7 @@ const SignUp = () => {
                         <div className="text-center lg:text-left">
                             <h1 className="text-5xl font-bold my-3">Sign Up Here</h1>
                         </div>
-                        <form className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                        <form onSubmit={handleSubmit} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                             <div className="card-body">
 
                                 <div className="form-control">
@@ -41,13 +85,17 @@ const SignUp = () => {
                                     <input type="text" name='photourl' placeholder="Photo URL" className="input input-bordered" />
                                 </div>
 
+                                <label className="label">
+                                    <span className="label-text text-red-700">{error}</span>
+                                </label>
+
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary">sign up</button>
                                 </div>
                                 <label className="label text-center">
                                     <p>Already have an account? <Link to='/login' className="btn btn-link">Login</Link></p>
                                 </label>
-                                
+
                             </div>
                         </form>
                     </div>
