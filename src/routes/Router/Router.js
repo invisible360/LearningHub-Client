@@ -10,6 +10,7 @@ import SignUp from "../../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import CatCourses from "../../pages/CatCourses/CatCourses";
 import CourseDetails from "../../pages/CourseDetails/CourseDetails";
+import Checkout from "../../pages/Checkout/Checkout";
 
 
 export const routes = createBrowserRouter([
@@ -39,7 +40,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/courses',
-                element: <PrivateRoute><Courses><AllCourseCard></AllCourseCard></Courses></PrivateRoute>
+                element: <Courses><AllCourseCard></AllCourseCard></Courses>
             },
             {
                 path: '/blog',
@@ -54,6 +55,10 @@ export const routes = createBrowserRouter([
                 path: '/course-details/:id',
                 loader: ({ params }) => fetch(`http://localhost:5000/course_details/${params.id}`),
                 element: <CourseDetails></CourseDetails>
+            },
+            {
+                path: '/checkout',
+                element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
             }
         ]
     }

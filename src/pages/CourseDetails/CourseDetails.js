@@ -10,12 +10,58 @@ import { FcPrivacy } from 'react-icons/fc';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Lectures from './Lectures';
+import jsPDF from 'jspdf';
 
 const CourseDetails = () => {
 
     const courseDetails = useLoaderData();
     // console.log(courseDetails);
-    const { title, overview, instructor, others_info } = courseDetails;
+    const { title, overview, instructor, others_info, id } = courseDetails;
+
+    const generatePDF = () => {
+        const doc = new jsPDF('p', 'pt', 'a4');
+        doc.text(`Course ID:- ${id}`, 30, 50);
+        doc.text(`Title:- ${title}`, 30, 70);
+
+        const lines = doc.splitTextToSize(`Description:- ${overview.description}`, 550)
+        doc.text(30, 100, lines);
+
+        doc.text(`Application:`, 30, 250);
+
+
+        let temp = 260;
+        for (let i = 0; i < overview.oportunies.length; i++) {
+            const opp = overview.oportunies[i];
+            doc.text(30, temp += 20, `\u2022 ${opp}`)
+            // console.log(temp+=20);
+        }
+
+        doc.text(`Topics Covered:`, 30, 530);
+        let temp2 = 540;
+        for (let i = 0; i < overview.topic_covered.length; i++) {
+            const top = overview.topic_covered[i];
+            doc.text(30, temp2 += 20, `\u2022 ${top}`)
+            // console.log(temp+=20);
+        }
+
+        doc.addImage(`${instructor.img}`, 'JPEG', 30, 750, 80, 80)
+        doc.text(`Instructor:${instructor.name}`, 115, 770);
+        doc.text(`Language:${overview?.Language}`, 115, 790);
+        doc.text(`Published On:${overview?.publishedDate}`, 115, 810);
+
+
+        doc.save(`Course-${id}-pdf.pdf`);
+
+        //use of html2canvas
+        /* doc.html(document.querySelector("#pdf"), {
+            callback: function (pdf) {
+                const pageCount = doc.internal.getNumberOfPages();
+                pdf.deletePage(pageCount);
+                pdf.save("mypdf.pdf");
+            }
+        }); */
+
+    };
 
     return (
         <div>
@@ -36,16 +82,17 @@ const CourseDetails = () => {
                 <section className='md:col-span-8 mt-10 md:mt-0'>
                     <div className="md:indicator">
                         <div className="indicator-item indicator-top">
-                            <button className="hidden md:block btn text-white"><VscFilePdf className='text-3xl' /></button>
+
+                            <button onClick={generatePDF} className="hidden md:block btn text-white"><VscFilePdf className='text-3xl' /></button>
                         </div>
 
                         <div>
-                            <div className="card w-full bg-base-100 shadow-xl">
+                            <div id='pdf' className="card w-full bg-base-100 shadow-xl">
                                 <div className='h-80 bg-gradient-to-r from-sky-500 to-indigo-500'>
                                     <div className='w-full md:w-3/4'>
                                         <div className='flex items-center p-2 md:p-0'>
                                             <h1 className='text-xl md:text-4xl font-bold md:p-4 text-white'>{title}</h1>
-                                            <button className="md:hidden block btn btn-sm text-white"><VscFilePdf className='text-xl' /></button>
+                                            <button onClick={generatePDF} className="md:hidden block btn btn-sm text-white"><VscFilePdf className='text-xl' /></button>
                                         </div>
                                         <h1 className='text-sm md:text-lg p-2 md:px-4 text-white'>{overview?.motto}</h1>
                                     </div>
@@ -142,7 +189,7 @@ const CourseDetails = () => {
                                 <SiGnuprivacyguard className='text-3xl' />
                                 <span className='ml-5'>Lifetime Access</span>
                             </div>
-                            <button className='btn btn-success text-white my-5'><FcPrivacy className='text-2xl mr-4' />Get Premium Access</button>
+                            <Link to='/checkout' className='btn btn-success text-white my-5'><FcPrivacy className='text-2xl mr-4' />Get Premium Access</Link>
                         </div>
                     </div>
                 </section>
