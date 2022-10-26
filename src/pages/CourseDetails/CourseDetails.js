@@ -189,7 +189,7 @@ const CourseDetails = () => {
                                 <SiGnuprivacyguard className='text-3xl' />
                                 <span className='ml-5'>Lifetime Access</span>
                             </div>
-                            <Link to='/checkout' className='btn btn-success text-white my-5'><FcPrivacy className='text-2xl mr-4' />Get Premium Access</Link>
+                            <Link to={`/checkout/${id}`} className='btn btn-success text-white my-5'><FcPrivacy className='text-2xl mr-4' />Get Premium Access</Link>
                         </div>
                     </div>
                 </section>
