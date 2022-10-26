@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assests/logo.png';
+import logohub from '../../assests/ithub.png'
 import ReactTooltip from 'react-tooltip';
 import { AuthContext } from '../../context/AuthConext/AuthProvider';
 
@@ -18,7 +19,7 @@ const Header = () => {
     }
 
     return (
-        <div className="navbar bg-base-100 drop-shadow-lg">
+        <div className="navbar bg-accent drop-shadow-lg">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -34,8 +35,8 @@ const Header = () => {
 
                 <Link to='/' className='p-2'>
                     <div className='flex items-center'>
-                        <img className='w-8 md:w-16' src={logo} alt="" />
-                        <span className='text-sm md:text-2xl font-bold ml-2 md:ml-4'>ProgramingHUB</span>
+                        <img className='w-8 md:w-16 rounded-xl' src={logohub} alt="" />
+                        <span className='text-sm md:text-2xl text-white font-bold ml-2 md:ml-4'>LearningHUB</span>
                     </div>
                 </Link>
 
@@ -43,10 +44,10 @@ const Header = () => {
 
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
-                    <li className='font-bold text-lg ml-5'><Link to='/home'>Home</Link></li>
-                    <li className='font-bold text-lg ml-5'><Link to='/courses'>Courses</Link></li>
-                    <li className='font-bold text-lg ml-5'><Link to='/faq'>FAQ</Link></li>
-                    <li className='font-bold text-lg ml-5'><Link to='/blog'>Blog</Link></li>
+                    <li className='font-bold text-white text-lg ml-5'><Link to='/home'>Home</Link></li>
+                    <li className='font-bold text-white text-lg ml-5'><Link to='/courses'>Courses</Link></li>
+                    <li className='font-bold text-white text-lg ml-5'><Link to='/faq'>FAQ</Link></li>
+                    <li className='font-bold text-white text-lg ml-5'><Link to='/blog'>Blog</Link></li>
                 </ul>
             </div>
 
