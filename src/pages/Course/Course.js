@@ -2,7 +2,7 @@ import React from 'react';
 
 const Course = ({ course }) => {
     // console.log (course)
-    const { title, overview, others_info } = course;
+    const { title, overview } = course;
 
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
