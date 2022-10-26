@@ -4,83 +4,117 @@ import { MdAccessTime, MdLanguage } from "react-icons/md";
 import { SlCalender } from "react-icons/sl";
 import { TbFileCertificate } from "react-icons/tb";
 import { SiGnuprivacyguard } from "react-icons/si";
+import { VscFilePdf } from "react-icons/vsc";
 import { Link, useLoaderData } from 'react-router-dom';
+import { FcPrivacy } from 'react-icons/fc';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import Lectures from './Lectures';
 
 const CourseDetails = () => {
 
     const courseDetails = useLoaderData();
-    console.log(courseDetails);
+    // console.log(courseDetails);
     const { title, overview, instructor, others_info } = courseDetails;
 
     return (
         <div>
 
+            <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h3 className="font-bold text-lg text-center my-5 text-accent">Sample Certificate</h3>
+                    <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/certificate-of-achievement-design-template-58b46df635d246b8041a406332c7dcf2_screen.jpg?ts=1613737021" alt="" srcSet="" />
+                    <div className="modal-action justify-center">
+                        <label htmlFor="my-modal-6" className="btn btn-accent">Ok!</label>
+                    </div>
+                </div>
+            </div>
 
 
-            <main className='grid grid-cols-12 gap-5 m-10'>
-                <section className='col-span-8'>
-                    <div className="indicator">
+            <main className='grid grid-cols-1 md:grid-cols-12 gap-5 m-10'>
+                <section className='md:col-span-8 mt-10 md:mt-0'>
+                    <div className="md:indicator">
                         <div className="indicator-item indicator-top">
-                            <button className="btn btn-accent text-white">Download PDF</button>
+                            <button className="hidden md:block btn text-white"><VscFilePdf className='text-3xl' /></button>
                         </div>
+
                         <div>
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <div className='h-80 bg-gradient-to-r from-sky-500 to-indigo-500'>
-                                    <div className='w-3/4'>
-                                        <h1 className='text-4xl font-bold p-4 text-white'>{title}</h1>
-                                        <h1 className='text-lg px-4 text-white'>{overview?.motto}</h1>
+                                    <div className='w-full md:w-3/4'>
+                                        <div className='flex items-center p-2 md:p-0'>
+                                            <h1 className='text-xl md:text-4xl font-bold md:p-4 text-white'>{title}</h1>
+                                            <button className="md:hidden block btn btn-sm text-white"><VscFilePdf className='text-xl' /></button>
+                                        </div>
+                                        <h1 className='text-sm md:text-lg p-2 md:px-4 text-white'>{overview?.motto}</h1>
                                     </div>
 
-                                    <div className='p-4 my-3'>
-                                        <div className='flex items-center text-white'>
+                                    <div className='p-4 my-2'>
+                                        <div className='flex items-center text-white mb-1'>
                                             <img className='w-10 rounded-full' src={instructor?.img} alt=''></img> <span className='ml-2'>{instructor?.name}</span>
                                         </div>
-                                        <div className='flex items-center text-white'>
+                                        <div className='flex items-center text-white mb-1'>
                                             <MdLanguage />
                                             <span className='ml-2'>Language - {overview?.Language}</span>
                                         </div>
-                                        <div className='flex items-center text-white'>
+                                        <div className='flex items-center text-white mb-1'>
                                             <SlCalender className='text-white' />
                                             <span className='ml-2'>Published On - {overview?.publishedDate}</span>
                                         </div>
                                     </div>
-
-
                                 </div>
 
+                                <Tabs>
+                                    <TabList>
+                                        <Tab><span className='font-bold'>Lectures</span></Tab>
+                                        <Tab><span className='font-bold'>Overview</span></Tab>
+                                    </TabList>
 
-                                <div className="card-body">
-                                    <h2 className="card-title">
-                                        Shoes!
-                                        <div className="badge badge-secondary">NEW</div>
-                                    </h2>
-                                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                                    <div className="card-actions justify-end">
-                                        <div className="badge badge-outline">Fashion</div>
-                                        <div className="badge badge-outline">Products</div>
-                                    </div>
-                                </div>
+                                    <TabPanel>
+                                        {
+                                            overview.lectures_videos_topics.map(topic => <Lectures key={topic.id} topic={topic}></Lectures>)
+                                        }
+
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <div className="card-body">
+                                            <h2 className="card-title">Description</h2>
+                                            <p className='w-[16rem] md:w-[52rem]'>{overview.description}</p>
+
+                                            <h2 className="card-title mt-3">Applications</h2>
+                                            {
+                                                overview.oportunies.map((opp, index) => <li key={index}>{opp}</li>)
+                                            }
+                                            <h2 className="card-title mt-3">Topics Covered</h2>
+                                            {
+                                                overview.topic_covered.map((top, index) => <li key={index}>{top}</li>)
+                                            }
+                                            <h2 className="card-title mt-3">Who this course for?</h2>
+                                            {
+                                                overview.course_for.map((cfor, index) => <li key={index}>{cfor}</li>)
+                                            }
+                                            <h2 className="card-title mt-3">What will I get?</h2>
+                                            {
+                                                overview.benefits.map((benf, index) => <li key={index}>{benf}</li>)
+                                            }
+                                            <h2 className="card-title mt-3">Requirements</h2>
+                                            {
+                                                overview.requirements.map((req, index) => <li key={index}>{req}</li>)
+                                            }
+
+                                        </div>
+                                    </TabPanel>
+                                </Tabs>
+
                             </div>
                         </div>
                     </div>
                 </section>
 
 
-
-                <input type="checkbox" id="my-modal-6" className="modal-toggle" />
-                <div className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box">
-                        <h3 className="font-bold text-lg text-center my-5">Sample Certificate</h3>
-                        <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/certificate-of-achievement-design-template-58b46df635d246b8041a406332c7dcf2_screen.jpg?ts=1613737021" alt="" srcset="" />
-                        <div className="modal-action justify-center">
-                            <label htmlFor="my-modal-6" className="btn">Ok!</label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <section className='col-span-4 ml-10 mt-10'>
-                    <div className="card w-96 bg-base-100 shadow-xl">
+                <section className='order-first md:order-last md:col-span-4'>
+                    <div className="card bg-base-100 shadow-xl">
                         <figure><img src={overview?.image_url} alt="" /></figure>
                         <p className='m-3 text-xl font-semibold'><span className='text-blue-600'>Course Title:</span> {title}</p>
                         <div className="card-body">
@@ -94,7 +128,7 @@ const CourseDetails = () => {
                             <div className='flex items-center'>
                                 <TbFileCertificate className='text-3xl' />
                                 <span className='ml-5'> Completion Certificate</span>
-                                <label htmlFor="my-modal-6" className="btn modal-button btn-xs">sample certification</label>
+                                <label htmlFor="my-modal-6" className="btn modal-button btn-outline btn-xs ml-5">sample</label>
                             </div>
                             <div className='flex items-center'>
                                 <FaRegPlayCircle className='text-3xl' />
@@ -108,7 +142,7 @@ const CourseDetails = () => {
                                 <SiGnuprivacyguard className='text-3xl' />
                                 <span className='ml-5'>Lifetime Access</span>
                             </div>
-                            <button className='btn btn-success text-white my-5'>Get Premium Access</button>
+                            <button className='btn btn-success text-white my-5'><FcPrivacy className='text-2xl mr-4' />Get Premium Access</button>
                         </div>
                     </div>
                 </section>
