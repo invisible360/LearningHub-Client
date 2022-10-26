@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Theme } from 'react-daisyui';
 import { Outlet } from 'react-router-dom';
+import Footer from '../shared/Footer/Footer';
 import Header from '../shared/Header/Header';
 import ThemeToogle from '../shared/ThemeToogle/ThemeToogle';
 
@@ -24,11 +25,13 @@ const Main = () => {
                     <Theme dataTheme='dark'>
                         <Header />
                         <Outlet />
+                        <Footer/>
                     </Theme>
                     :
                     <Theme dataTheme='light'>
                         <Header />
                         <Outlet />
+                        <Footer/>
                     </Theme>
             }
 

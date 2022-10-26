@@ -5,11 +5,11 @@ import AllCourseCard from "../../pages/AllCourseCard/AllCourseCard";
 import Courses from "../../pages/Courses/Courses";
 import FAQ from "../../pages/FAQ/FAQ";
 import Home from "../../pages/Home/Home";
-import Loading from "../../pages/Loading/Loading";
 import Login from "../../pages/Login/Login";
 import SignUp from "../../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import CatCourses from "../../pages/CatCourses/CatCourses";
+import CourseDetails from "../../pages/CourseDetails/CourseDetails";
 
 
 export const routes = createBrowserRouter([
@@ -34,10 +34,6 @@ export const routes = createBrowserRouter([
                 element: <SignUp />
             },
             {
-                path: '/loading',
-                element: <Loading />
-            },
-            {
                 path: '/faq',
                 element: <FAQ />
             },
@@ -53,6 +49,11 @@ export const routes = createBrowserRouter([
                 path: '/course/:id',
                 loader: ({ params }) => fetch(`http://localhost:5000/courses_categories/${params.id}`),
                 element: <Courses><CatCourses></CatCourses></Courses>
+            },
+            {
+                path: '/course-details/:id',
+                loader: ({ params }) => fetch(`http://localhost:5000/course_details/${params.id}`),
+                element: <CourseDetails></CourseDetails>
             }
         ]
     }

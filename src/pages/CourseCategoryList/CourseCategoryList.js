@@ -13,7 +13,7 @@ const CourseCategoryList = () => {
     return (
         <aside className='col-span-12 md:col-span-3'>
             <div className="btn-group btn-group-vertical w-full">
-                <button className="btn btn-accent text-white mb-3 font-bold ">Top Categories</button>
+                <button className="btn btn-accent text-white mb-3 font-bold" >Top Categories</button>
                 {
                     courses.map(course => <Link key={course.id} className="btn btn-accent btn-outline mb-1" to={`/course/${course.id}`}>{course.name}</Link>)
                 }
