@@ -23,8 +23,8 @@ const Footer = () => {
                 <div>
                     <span className="footer-title">Social</span>
                     <div className="grid grid-flow-col gap-4">
-                        <Link><FaTwitter  className='text-2xl'/></Link>
-                        <Link><FaYoutube  className='text-2xl'/></Link>
+                        <Link><FaTwitter className='text-2xl' /></Link>
+                        <Link><FaYoutube className='text-2xl' /></Link>
                         <Link><FaFacebook className='text-2xl' /></Link>
                     </div>
                 </div>
