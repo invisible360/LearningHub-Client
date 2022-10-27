@@ -1,5 +1,4 @@
 import React from 'react';
-import FAQ from '../FAQ/FAQ';
 import Carousel from './Carousel';
 import Countdown from './Countdown';
 
