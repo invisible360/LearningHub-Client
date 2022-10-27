@@ -1,6 +1,7 @@
 # About the project
 
-Website Name: (Learning HUB) [https://programing-hub-dcebb.web.app/]
+Website Name: Learning HUB 
+Live Link: https://programing-hub-dcebb.web.app/
 
 ## Features
 * Collection of online course
