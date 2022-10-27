@@ -4,8 +4,12 @@ import { useLoaderData } from 'react-router-dom';
 const Checkout = () => {
     const checkOutInfo = useLoaderData ();
     return (
-        <div>
-            <h1 className="text-3xl font-bold text-center">{checkOutInfo.title}</h1>
+        <div className='min-h-screen'>
+            <h1 className="text-5xl font-bold text-center my-10">Name of the Course: <span className='text-orange-400'>{checkOutInfo.title}</span></h1>
+
+            <h1 className='text-5xl text-center font-bold my-20'>More Features Are Coming Soon....</h1>
+
+
         </div>
     );
 };

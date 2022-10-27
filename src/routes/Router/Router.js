@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import CatCourses from "../../pages/CatCourses/CatCourses";
 import CourseDetails from "../../pages/CourseDetails/CourseDetails";
 import Checkout from "../../pages/Checkout/Checkout";
+import NotFound404 from "../../pages/404NotFound/NotFound404";
 
 
 export const routes = createBrowserRouter([
@@ -48,18 +49,22 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/course/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/courses_categories/${params.id}`),
+                loader: ({ params }) => fetch(`https://it-hub-server.vercel.app/courses_categories/${params.id}`),
                 element: <Courses><CatCourses></CatCourses></Courses>
             },
             {
                 path: '/course-details/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/course_details/${params.id}`),
+                loader: ({ params }) => fetch(`https://it-hub-server.vercel.app/course_details/${params.id}`),
                 element: <CourseDetails></CourseDetails>
             },
             {
                 path: '/checkout/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/course_details/${params.id}`),
+                loader: ({ params }) => fetch(`https://it-hub-server.vercel.app/course_details/${params.id}`),
                 element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
+            },
+            {
+                path: '*',
+                element: <NotFound404 />
             }
         ]
     }

@@ -5,7 +5,8 @@ const Courses = ({ children }) => {
 
     return (
         <div>
-            <section className='grid grid-cols-12 gap-5 m-5'>
+            <div className='py-1'></div>
+            <section className='grid md:grid-cols-12 gap-5 m-5'>
                 <CourseCategoryList />
                 {children}
             </section>

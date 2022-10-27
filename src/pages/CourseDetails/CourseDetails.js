@@ -11,6 +11,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Lectures from './Lectures';
 import jsPDF from 'jspdf';
+import ScrollToTop from 'react-scroll-to-top';
 
 const CourseDetails = () => {
 
@@ -65,6 +66,7 @@ const CourseDetails = () => {
 
     return (
         <div>
+            <div className='py-1'></div>
 
             <input type="checkbox" id="my-modal-6" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
@@ -83,7 +85,7 @@ const CourseDetails = () => {
                     <div className="md:indicator">
                         <div className="indicator-item indicator-top">
 
-                            <button onClick={generatePDF} className="hidden md:block btn text-white"><VscFilePdf className='text-3xl' /></button>
+                            <button onClick={generatePDF} className="hidden md:block btn btn-warning text-black"><VscFilePdf className='text-3xl' /></button>
                         </div>
 
                         <div>
@@ -161,7 +163,7 @@ const CourseDetails = () => {
 
 
                 <section className='order-first md:order-last md:col-span-4'>
-                    <div className="card bg-base-100 shadow-xl">
+                    <div className="sticky top-0  card bg-base-100 shadow-xl">
                         <figure><img src={overview?.image_url} alt="" /></figure>
                         <p className='m-3 text-xl font-semibold'><span className='text-blue-600'>Course Title:</span> {title}</p>
                         <div className="card-body">
@@ -193,6 +195,8 @@ const CourseDetails = () => {
                         </div>
                     </div>
                 </section>
+
+                <ScrollToTop smooth width="40"color='red' style={{backgroundColor: 'cyan'}}/>
             </main>
         </div>
     );

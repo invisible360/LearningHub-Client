@@ -13,7 +13,7 @@ const Blog = () => {
 
     return (
         <div>
-
+            <div className='py-1 md:py-5'></div>
             {
                 state === 1 ? <Modal id={quesAnss[0].id} ques={quesAnss[0].ques} ans={quesAnss[0].ans} /> : undefined
             }
